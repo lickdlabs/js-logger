@@ -1,6 +1,6 @@
 {
   "name": "@lickd/logger",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Lickd logger",
   "repository": {
     "type": "git",

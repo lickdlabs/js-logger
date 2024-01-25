@@ -1,24 +1,35 @@
-import * as crypto from "crypto";
-import winston from "winston";
+// https://developer.mozilla.org/en-US/docs/Web/API/console
+export interface Logger {
+  debug(message?: any, ...optionalParams: any[]): void;
+  error(message?: any, ...optionalParams: any[]): void;
+  info(message?: any, ...optionalParams: any[]): void;
+  log(message?: any, ...optionalParams: any[]): void;
+  trace(message?: any, ...optionalParams: any[]): void;
+  warn(message?: any, ...optionalParams: any[]): void;
+}
 
-type TLogger = {
-  defaultMeta: {
-    originId?: string;
-  };
-};
+export class ConsoleLogger implements Logger {
+  debug(message?: any, ...optionalParams: any[]): void {
+    console.debug(message, ...optionalParams);
+  }
 
-export { Logger } from "winston";
+  error(message?: any, ...optionalParams: any[]): void {
+    console.error(message, ...optionalParams);
+  }
 
-export const createLogger = (config?: TLogger): winston.Logger =>
-  winston.createLogger({
-    level: "info",
-    format: winston.format.combine(
-      winston.format.timestamp(),
-      winston.format.json(),
-    ),
-    defaultMeta: {
-      traceId: crypto.randomUUID(),
-      ...config?.defaultMeta,
-    },
-    transports: [new winston.transports.Console()],
-  });
+  info(message?: any, ...optionalParams: any[]): void {
+    console.info(message, ...optionalParams);
+  }
+
+  log(message?: any, ...optionalParams: any[]): void {
+    console.log(message, ...optionalParams);
+  }
+
+  trace(message?: any, ...optionalParams: any[]): void {
+    console.trace(message, ...optionalParams);
+  }
+
+  warn(message?: any, ...optionalParams: any[]): void {
+    console.warn(message, ...optionalParams);
+  }
+}
